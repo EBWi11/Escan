@@ -1,0 +1,1 @@
+select Users.user_ID,number,Scan.meeting_ID,scan_time from (Scan left join (Users left join UsersInfo on Users.user_ID = UsersInfo.user_ID) on Scan.user_ID=Users.user_ID) left join Meeting on Scan.meeting_ID = Meeting.meeting_ID;

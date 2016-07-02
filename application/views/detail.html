@@ -1,0 +1,15 @@
+<html>
+<head>
+  <script src="../../../../jquery-2.1.1.js"></script>
+  <script>
+  function revise_remark(mid,uid,time)
+  {
+  	var remark = $("#"+uid).val();
+  	$.post("../../revise_remark", { mid:mid,uid:uid,time:time,remark:remark} );
+  	//window.location.reload();
+  }
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>add meeting</title>
+  <script src="../../jquery-2.1.1.js"></script>
+
+  <script>
+  function add_meeting()
+  {
+    var meeting_name = $("#meeting_name").val();
+    var class_no = $("#class_no").val();
+    var location = $("#location").val();
+    var start_time = $("#start_time").val();
+    var end_time = $("#end_time").val();
+    var total_people = $("#total_people").val();
+
+    if(meeting_name && class_no && location && start_time && end_time && total_people)
+    {
+      $.ajax({
+        type:"post",
+        url:"../home/add_meeting_api",
+        dataType:"json",
+        data:"meeting_name="+meeting_name+"&class_no="+class_no+"&location="+location+"&start_time="+start_time+"&end_time="+end_time+"&total_people="+total_people,
+        success:function(req){
+          if(req.check=="1")
+          {
+            location.href = "../index.php/home";
+          }
+          else
+          {
+            document.getElementById('error').innerHTML = "错误！";
+          }
+                          }
+      });
+    }
+    else {
+      alert("请录入完整信息");
+    }
+  }
+  </script>
+</head>
+<body>
+  <h1>add meeting</h1>
+  <div>
+    meeting name:<input type = "text" id = "meeting_name"><inpit><br>
+    class number:<input type = "text" id = "class_no"><inpit><br>
+    location:<input type = "text" id = "location"><inpit><br>
+    start time:<input type = "text" id = "start_time"><inpit><br>
+    end time:<input type = "text" id = "end_time"><inpit><br>
+    total people:<input type = "text" id = "total_people"><inpit><br>
+    <input type = "button" value = "add" onclick = "add_meeting()"></input>
+  </div>
+</body>
+</html>

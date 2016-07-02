@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>my meeting</title>
+  <script src="../../../jquery-2.1.1.js"></script>
+  <script>
+  function status()
+  {
+    var status = $("#status").val();
+    var mid = $("#mid").val();
+
+    if(status=="open")
+    {
+      document.getElementById('status').value="close";
+      $.post("../status", { mid: mid,status: "1"} );
+    }
+    else {
+      document.getElementById('status').value="open";
+      $.post("../status", { mid: mid,status: "2"} );
+    }
+  }
+
+  function revise_remark(mid,uid,time)
+  {
+    var remark = $("#"+uid).val();
+    $.post("../revise_remark", { mid:mid,uid:uid,time:time,remark:remark} );
+    //window.location.reload();
+  }
+  </script>
+</head>
+<body>
+<div>
+  <input id = "status" value = "<?php echo html_escape($status); ?>" type = "button" onclick = "status()"></input><br>
+  <input type="text" id = "mid" value="<?php echo html_escape($mid); ?>" hidden/>
+</div>
+</body>
+</html>

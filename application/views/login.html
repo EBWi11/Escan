@@ -1,0 +1,47 @@
+<html>
+<head>
+  <title>login</title>
+  <h1>login</h1>
+   <script src="../../jquery-2.1.1.js"></script>
+   <script>
+   function login()
+   {
+     var phone_number = $("#phone_number").val();
+     var password = $("#password").val();
+     var captcha = $("#captcha").val();
+
+     if(phone_number && password)
+     {
+       $.ajax({
+         type:"post",
+         url:"login/login_api",
+         dataType:"json",
+         data:"phone_number="+phone_number+"&password="+password+"&captcha="+captcha,
+         success:function(req){
+
+                            if(req.check=='1')
+                            {
+                                document.getElementById('error').innerHTML="success";
+                                location.href = "../index.php/home";
+                            }
+                            else {
+                                document.getElementById('error').innerHTML="用户名或密码错误！";
+                            }
+
+                           }
+       });
+
+     }
+     else {
+       alert("please input your phonenumber and password!");
+     }
+   }
+   </script>
+</head>
+<div>
+  phone number:<input type="text" id="phone_number"></inpur><br>
+  password:<input type="password" id="password"></input><br>
+  <input type="button" value="login" onclick="login()"></input>
+  <div id="error"></div>
+</div>
+</html>

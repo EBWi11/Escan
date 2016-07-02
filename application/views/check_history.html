@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" type="text/css" href="../../../css/manhuaDate.1.0.css">
+<script type="text/javascript" src="../../../js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../../js/manhuaDate.1.0.js"></script>
+<script>
+$(function (){
+	$("input.mh_date").manhuaDate({
+		Event : "click",
+		Left : 0,
+		Top : -16,
+		fuhao : "-",
+		isTime : false,
+		beginY : 2013,
+		endY :2030
+	});
+
+});
+
+function check_history()
+{
+   var date = $("#date").val();
+   var mid = $("#mid").val();
+   //$.post("../check_history", { date:date,mid:mid} );
+	 location.href = "../check_history/"+mid+"/"+date;
+}
+
+</script>
+
+</head>
+<body>
+<br /><br />
+<h1>check history</h1>
+<input type = "text"  id = "date"  class = "mh_date" readonly="readonly"/>
+<input type = "button" value = "check" onclick = "check_history()"/>
+<input type="text" id = "mid" value="<?php echo html_escape($mid); ?>" hidden/>
+</body>
+</html>

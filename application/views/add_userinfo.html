@@ -1,0 +1,51 @@
+<html>
+<head>
+  <title>add userInfo</title>
+  <script src="../../jquery-2.1.1.js"></script>
+
+  <script>
+  function add_userinfo()
+  {
+      var department = $("#department").val();
+      var number = $("#number").val();
+      var position = $("#position").val();
+      var class_num = $("#class_num").val();
+      if(department && number && position && class_num)
+      {
+        $.ajax({
+          type:"post",
+          url:"../index.php/home/add_userinfo_api",
+          dataType:"json",
+          data:"department="+department+"&position="+position+"&class_num="+class_num+"&number="+number,
+          success:function(req){
+            if(req.check=="1")
+            {
+              location.href = "../index.php/home";
+            }
+            else
+            {
+              document.getElementById('error').innerHTML = "错误！";
+            }
+                            }
+        });
+      }
+      else {
+        alert("请录入完整信息");
+      }
+
+  }
+
+  </script>
+</head>
+<body>
+  <h1>add userInfo</h1>
+  <p>你没有任何个人身份信息，请添加身份信息</p>
+  <div>
+    department:<input type = "text" id = "department"></input><br>
+    number:<input type = "text" id = "number"></input><br>
+    position:<input type = "text" id = "position"></input><br>
+    class:<input type = "text" id = "class_num"></input><br>
+    <input type = "button" value = "add" id = "button" onclick = "add_userinfo()"></input>
+  </div>
+</body>
+</html>

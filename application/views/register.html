@@ -1,0 +1,76 @@
+<html>
+<head>
+  <title>register</title>
+   <script src="../../jquery-2.1.1.js"></script>
+   <script>
+   function check(type)
+   {
+      if(type!="register")
+      {
+        if(type=="password_rep")
+        {
+        var password=$("#password").val();
+        var password_rep=$("#password_rep").val();
+        single_check(type,password,password_rep);
+        }
+        else
+        {
+          var str=$("#"+type).val();
+          single_check(type,str);
+        }
+      }
+      else
+      {
+          register_check(type);
+      }
+   }
+
+   function single_check(type,str1,str2)
+   {
+     $.ajax({
+       type:"post",
+       url:"../register/register_api",
+       dataType:"json",
+       data:"type="+type+"&str1="+str1+"&str2="+str2,
+       success:function(){
+                         }
+     });
+   }
+
+
+   function register_check(type)
+   {
+     var phone_number=$("#phone_number").val();
+     var email=$("#email").val();
+     var name=$("#name").val();
+     var sex=$("#sex").val();
+     var password=$("#password").val();
+     var password_rep=$("#password_rep").val();
+
+     $.ajax({
+       type:"post",
+       url:"../register/register_api",
+       dataType:"json",
+       data:"type="+type+"&phone_number="+phone_number+"&email="+email+"&name="+name+"&sex="+sex+"&password="+password+"&password_rep="+password_rep,
+       success:function(){
+                         }
+     });
+   }
+
+   </script>
+
+</head>
+<body>
+  <h1>register</h1>
+  <div>
+      phone_number<input type="text" id="phone_number" onblur="check('phone_number')"><br>
+      email<input type="text" id="email" onblur="check('email')"><br>
+      name<input type="text" id="name" onblur="check('name')"><br>
+      sex<input type="text" id="sex" onblur="check('sex')"><br>
+      password<input type="password" id="password" onblur="check('password')"><br>
+      password_rep<input type="password" id="password_rep" onblur="check('password_rep')"><br>
+      <input type="button" onclick="check('register')" value="register"></input>
+    <div id="error"></div>
+  </div>
+</body>
+</html>
